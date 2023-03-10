@@ -49,3 +49,27 @@ type Required_Props = {
 const obj5: Props = { a: 5 };
 // const obj6: Required_Props = { a: 5 };
 //에러 발생
+
+/* 
+3. Readonly<Type>
+<Type>의 모든 속성을 읽기 전용(readonly)로 변경한 새로운 타입을 반환
+*/
+interface Todo {
+  title: number;
+  description: string;
+}
+
+type Readonly_Todo = Readonly<Todo>;
+/* 
+type Readonly_Todo = {
+  readonly title: number;
+  readonly description: string;
+}
+*/
+let tomorrow: Readonly_Todo = {
+  title: 230311,
+  description: "TS 학습",
+};
+
+// tomorrow.description = "TS 학습과 새 프로젝트 기획";
+// 에러 발생
