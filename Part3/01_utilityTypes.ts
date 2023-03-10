@@ -27,3 +27,25 @@ let today: Partial_Todo = {
   title: 230310,
 };
 // 모두 옵션이 되었기 때문에 description 속성을 작성하지 않아도 에러가 발생하지 않음
+
+/* 
+2. Required<Type>
+<Type>의 모든 속성을 필수로 설정한 새로운 타입을 반환
+Partial의 반대
+*/
+interface Props {
+  a?: number;
+  b?: string;
+}
+
+type Required_Props = Required<Props>;
+/* 
+type Required_Props = {
+  a: number;
+  b: string;
+}
+*/
+
+const obj5: Props = { a: 5 };
+// const obj6: Required_Props = { a: 5 };
+//에러 발생
