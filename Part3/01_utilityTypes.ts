@@ -73,3 +73,24 @@ let tomorrow: Readonly_Todo = {
 
 // tomorrow.description = "TS 학습과 새 프로젝트 기획";
 // 에러 발생
+
+/* 
+4. Record<Keys,Type>
+<Keys>의 속성을 <Type>의 타입값으로 지정한 새로운 타입을 반환
+타입의 속성을 다른 타입에 매핑(Object를 다른 타입으로 변환)시키는 데 사용 가능
+*/
+type Page = "home" | "about" | "contact";
+
+type Record_Page = Record<Page, string>;
+/* 
+type Record_Page = {
+  home: string,
+  about: string,
+  contact: string
+}
+*/
+const nav: Record_Page = {
+  about: "about입니다.",
+  contact: "contact입니다.",
+  home: "home입니다.",
+};
