@@ -94,3 +94,29 @@ const nav: Record_Page = {
   contact: "contact입니다.",
   home: "home입니다.",
 };
+
+/* 
+5. Pick<Type, Keys>
+<Type> 중 <Keys> 속성만 모아 새로운 타입을 반환
+*/
+interface UserInfo {
+  name: string;
+  age: number;
+  email: string;
+  isValid: boolean;
+}
+
+type Key = "name" | "email";
+
+type Pick_UserInfo = Pick<UserInfo, Key>;
+/*
+type Pick_User = {
+   name: string;
+   email: string;
+}
+*/
+
+const userInfo: Pick<UserInfo, Key> = {
+  name: "Seona",
+  email: "sit.or.seona@gmail.com",
+};
