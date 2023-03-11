@@ -120,3 +120,30 @@ const userInfo: Pick<UserInfo, Key> = {
   name: "Seona",
   email: "sit.or.seona@gmail.com",
 };
+
+/* 
+6. Omit<Type, Keys>
+<Type>에서 <Keys> 속성만 제거한 새로운 타입을 반환
+Pick의 반대
+*/
+interface UserInfo {
+  name: string;
+  age: number;
+  email: string;
+  isValid: boolean;
+}
+
+type Keys = "name" | "email";
+
+type Omit_User = Omit<UserInfo, Keys>;
+/*
+type Omit_User = {
+    age: number;
+    isValid: boolean;
+}
+*/
+
+const userInfo2: Omit<UserInfo, Keys> = {
+  age: 44,
+  isValid: true,
+};
