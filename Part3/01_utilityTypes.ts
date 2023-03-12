@@ -170,3 +170,19 @@ type T1 = Exclude<"a" | "b" | "c", "a" | "b">;
 // type T1 = "c"
 type T2 = Exclude<string | number | (() => void), Function>;
 // type T2 = string | number
+
+/* 
+8. Extract<Type1, Type2>
+유니언 타입인 Type1에서 유니언 타입인 Type2와 겹치는 부분을 추출
+*/
+type Type1 = string | number | object | null;
+type Type2 = number | boolean;
+
+type Extract_Type = Extract<Type1, Type2>;
+/*
+type Extract_Type = number
+*/
+type T3 = Extract<"a" | "b" | "c", "a" | "f">;
+// type T3 = "a"
+type T4 = Extract<string | number | (() => void), Function>;
+// type T4 = () => void
