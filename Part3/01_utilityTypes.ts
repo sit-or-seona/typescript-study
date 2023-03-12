@@ -147,3 +147,26 @@ const userInfo2: Omit<UserInfo, Keys> = {
   age: 44,
   isValid: true,
 };
+
+/* 
+7. Exclude<Type1, Type2>
+유니언 타입인 Type1에서 Type2를 제외한 나머지 타입을 반환
+*/
+type Type = string | number | boolean;
+
+type Exclude_Type = Exclude<Type, number>;
+/* 
+type Exclude_Type = string | boolean
+*/
+
+const str: Exclude_Type = "string";
+
+// const num: Exclude_Type = 123;
+// 에러 발생
+
+type T0 = Exclude<"a" | "b" | "c", "a">;
+// type T0 = "b" | "c"
+type T1 = Exclude<"a" | "b" | "c", "a" | "b">;
+// type T1 = "c"
+type T2 = Exclude<string | number | (() => void), Function>;
+// type T2 = string | number
