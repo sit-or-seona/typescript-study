@@ -197,3 +197,34 @@ type NonNullable_Type1 = NonNullable<Type3>;
 /* 
 type NonNullable_Type = string | number | object
 */
+
+/* 
+10. Parameters<Type>
+함수를 <Type>으로 받아, 함수의 매개변수 타입을 튜플 타입으로 반환
+*/
+type Zip = { x: number; y: string; z: boolean };
+function zip(x: number, y: string, z: boolean): Zip {
+  return { x, y, z };
+}
+
+type ZipType = typeof zip;
+// type ZipType = (x: number, y: string, z: boolean) => Zip
+
+type Params = Parameters<typeof zip>;
+// type Params = [x: number, y: string, z: boolean]
+
+type Frist = Params[0]; // number
+type Second = Params[0]; // string
+type Third = Params[0]; // boolean
+
+function fn(a: string | number, b: boolean) {
+  return `[${a}, ${b}]`;
+}
+
+type Parameters_Key = Parameters<typeof fn>; // 함수의 매개변수를 타입으로 변환
+/*
+type Parameters_Key = [a: string | number, b: boolean]
+*/
+
+const aaaa: Parameters<typeof fn> = ["Hello", true];
+const bb: Parameters<typeof fn> = [123, false];
