@@ -186,3 +186,14 @@ type T3 = Extract<"a" | "b" | "c", "a" | "f">;
 // type T3 = "a"
 type T4 = Extract<string | number | (() => void), Function>;
 // type T4 = () => void
+
+/* 
+9. NonNullable<Type>
+유니온 타입인 <Type>에서 null과 undefined를 제외한 타입을 반환
+*/
+type Type3 = string | number | object | null;
+
+type NonNullable_Type1 = NonNullable<Type3>;
+/* 
+type NonNullable_Type = string | number | object
+*/
