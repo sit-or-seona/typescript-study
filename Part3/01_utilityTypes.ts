@@ -228,3 +228,27 @@ type Parameters_Key = [a: string | number, b: boolean]
 
 const aaaa: Parameters<typeof fn> = ["Hello", true];
 const bb: Parameters<typeof fn> = [123, false];
+
+/* 
+11. ConstructorParameters<Type>
+생성자 함수 타입인 <Type>을 받아, 생성자의 매개변수 타입을 새로운 튜플 타입으로 반환
+-> <Type>이 함수가 아닌 경우 never를 생성
+*/
+class UserClass {
+  static father = "홍길동";
+  readonly mother = "귀부인";
+
+  constructor(public name: string, private age: number) {}
+
+  add() {}
+}
+const neo = new UserClass("Neo", 12);
+
+type ConstructorParameters_Type = ConstructorParameters<typeof UserClass>;
+/*
+type ConstructorParameters_Type = [name: string, age: number]
+*/
+
+const ab: ConstructorParameters<typeof UserClass> = ["Neo", 12];
+
+type ErrorType = ConstructorParameters<ErrorConstructor>;
