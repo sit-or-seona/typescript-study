@@ -267,3 +267,23 @@ type ReturnType_Type = number
 */
 
 const bbb: ReturnType<typeof fn2> = 1234;
+
+/* 
+13. InstanceType<Type>
+생성자 함수의 타입 <Type>을 받아 함수의 인스턴스 타입을 반환
+*/
+class C {
+  x = 0;
+  y = 0;
+}
+
+type InstanceType_Type = InstanceType<typeof C>;
+/*
+type InstanceType_Type = C
+type InstanceType_Type = { x: number, y: number }
+*/
+
+const tt: InstanceType_Type = {
+  x: 100,
+  y: 200,
+};
