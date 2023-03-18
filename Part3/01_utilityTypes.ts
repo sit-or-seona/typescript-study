@@ -252,3 +252,18 @@ type ConstructorParameters_Type = [name: string, age: number]
 const ab: ConstructorParameters<typeof UserClass> = ["Neo", 12];
 
 type ErrorType = ConstructorParameters<ErrorConstructor>;
+
+/* 
+12. ReturnType<Type>
+함수의 타입 <Type>을 받아 함수의 return 타입을 반환
+*/
+function fn2(str: string): number {
+  return +str;
+}
+
+type ReturnType_Type = ReturnType<typeof fn2>;
+/*
+type ReturnType_Type = number
+*/
+
+const bbb: ReturnType<typeof fn2> = 1234;
