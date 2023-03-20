@@ -48,3 +48,62 @@ function len(x: any) {
 function newLen(x: any[] | string) {
   return x.length;
 }
+
+/* 
+Function Overloading 개념 쉽게 이해하기
+
+오버로딩
+: 함수가 여러 개의 call signatures를 가지고 있을 때 발생
+*/
+type Add = {
+  (a: number, b: number): number;
+  (a: number, b: string): number;
+};
+
+const add: Add = (a, b) => {
+  if (typeof b === "string") {
+    return a;
+  } else {
+    return a + b;
+  }
+};
+
+/* 
+실무 예제
+*/
+
+type Config = {
+  path: string;
+  state: object;
+};
+
+type Push = {
+  (path: string): void;
+  (config: Config): void;
+};
+
+const push: Push = (config) => {
+  if (typeof config === "string") {
+    console.log(config);
+  } else {
+    console.log(config.path, config.state);
+  }
+};
+
+/* 
+call signature의 파라미터 개수가 다른 경우
+
+c가 옵셔널이기 때문에 파라미터에 옵셔널 표시를 해줘야 함
+*/
+type Add2 = {
+  (a: number, b: number): number;
+  (a: number, b: number, c: number): number;
+};
+
+const add2: Add2 = (a, b, c?: number) => {
+  if (c) return a + b + c;
+  return a + b;
+};
+
+add2(1, 2);
+add2(1, 2, 3);
