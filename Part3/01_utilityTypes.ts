@@ -287,3 +287,36 @@ const tt: InstanceType_Type = {
   x: 100,
   y: 200,
 };
+
+/* 
+14. ThisParameterType<Type>
+함수의 타입 <Type>을 받아 명시적 this 매개변수 타입을 반환
+-> 명시적 this가 없을 경우, unknown을 반환
+
+*  --strictFunctionTypes 옵션이 활성화되었을 때만 올바르게 동작
+*/
+interface ICat {
+  name: string;
+}
+
+const cat: ICat = {
+  name: "Lucy",
+};
+
+function someFn(this: ICat, greeting: string) {
+  console.log(`${greeting} ${this.name}`); // ok
+}
+
+type ThisParameterType_Type = ThisParameterType<typeof someFn>;
+/*
+type ThisParameterType_Type = ICat
+*/
+
+function toHex(this: Number) {
+  return this.toString(16);
+}
+
+// 파라미터 n의 타입은 toHex()의 this 매개변수 타입인 Number가 됨
+function numberToString(n: ThisParameterType<typeof toHex>) {
+  return toHex.apply(n);
+}
