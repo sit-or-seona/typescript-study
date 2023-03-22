@@ -81,3 +81,57 @@ class Word {
 let obj = new Word("kim", 3, 5, "park");
 console.log(obj.num); //[3,5]
 console.log(obj.str); //['kim', 'park']
+
+/* 
+Class를 사용하여 사전 만들기
+*/
+type Words = {
+  [key: string]: string;
+};
+
+class Dict {
+  private words: Words;
+  constructor() {
+    this.words = {};
+  }
+
+  // 파라미터가 Word2 클래스의 인스턴스
+  add(word: Word2) {
+    if (this.words[word.term] === undefined) {
+      this.words[word.term] = word.def;
+    }
+  }
+
+  def(term: string) {
+    return this.words[term];
+  }
+
+  delete(word: string | Word2) {
+    if (typeof word === "string" && this.words[word]) {
+      delete this.words[word];
+    } else if (typeof word === "object" && this.words[word.term]) {
+      delete this.words[word.term];
+    }
+  }
+
+  update(word: Word2) {
+    if (this.words[word.term]) {
+      this.words[word.term] = word.def;
+    }
+  }
+}
+
+class Word2 {
+  constructor(public term: string, public def: string) {}
+}
+
+const kimchi = new Word2("kimchi", "한국의 음식");
+const bread = new Word2("bread", "?");
+const newBread = new Word2("bread", "빵");
+
+const dict = new Dict();
+
+dict.add(kimchi);
+dict.add(bread);
+dict.delete("kimchi");
+dict.update(newBread);
