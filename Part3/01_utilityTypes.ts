@@ -320,3 +320,36 @@ function toHex(this: Number) {
 function numberToString(n: ThisParameterType<typeof toHex>) {
   return toHex.apply(n);
 }
+
+/* 
+15. OmitThisParameter<Type>
+함수의 타입 <Type>을 받아 명시적 this 매개변수를 제거한 타입을 반환
+-> 명시적 this 타입을 제거했기 때문에 this의 타입은 any가 됨
+
+*  --strictFunctionTypes 옵션이 활성화되었을 때만 올바르게 동작
+*/
+interface ICat {
+  age: number;
+}
+
+function getAge(this: ICat): number {
+  return this.age;
+}
+
+const cats = {
+  age: 12, // Number
+};
+
+// cats 타입 { age: number } 가 명시적 this의 타입 ICat 인터페이스와 일치하니 문제없이 동작
+getAge.call(cats); // 12
+
+const dogs = {
+  age: "13", // String
+};
+const mice = {
+  age: false, // Boolean
+};
+
+// 인터페이스 타입 형식에 맞지 않아 에러를 일으킴
+getAge.call(dogs); // 에러 발생
+getAge.call(mice); // 에러 발생
