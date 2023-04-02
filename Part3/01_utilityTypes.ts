@@ -353,3 +353,31 @@ const mice = {
 // 인터페이스 타입 형식에 맞지 않아 에러를 일으킴
 getAge.call(dogs); // 에러 발생
 getAge.call(mice); // 에러 발생
+
+/* 
+16. ThisType<Type>
+함수의 타입 <Type>을 받아 this 컨텍스트를 Type으로 명시하여 반환
+
+* --noImplicitThis 플래그를 사용해야 함
+*/
+interface IUser {
+  name: string;
+  getName: () => string;
+}
+
+// methods 매개변수로 들어온 객체의 this를 IUser 타입으로 설정
+function makeNeo(methods: ThisType<IUser>) {
+  return {
+    name: "홍길동",
+    ...methods,
+  } as IUser; // 반환 객체값에 대한 타입을 IUser로 단언
+}
+
+const person = makeNeo({
+  getName() {
+    return this.name;
+  },
+}); // → const person: IUser = { name: 'Neo', getName() { return this.name; } }
+
+const isname = person.getName(); // return this.name이 실행되서 현재 neo 객체의 'Neo'가 반환됨
+console.log("isname: ", isname); // '홍길동'
