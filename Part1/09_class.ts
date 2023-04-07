@@ -85,12 +85,12 @@ console.log(obj.str); //['kim', 'park']
 /* 
 Class를 사용하여 사전 만들기
 */
-type Words = {
+type WordsType = {
   [key: string]: string;
 };
 
-class Dict {
-  private words: Words;
+class Dictionary {
+  private words: WordsType;
   constructor() {
     this.words = {};
   }
@@ -129,7 +129,7 @@ const kimchi = new Word2("kimchi", "한국의 음식");
 const bread = new Word2("bread", "?");
 const newBread = new Word2("bread", "빵");
 
-const dict = new Dict();
+const dict = new Dictionary();
 
 dict.add(kimchi);
 dict.add(bread);
