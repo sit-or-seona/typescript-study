@@ -1,8 +1,10 @@
 /* 
 interface 문법
-Object 타입 지정시 사용 가능
-class 문법과 유사
-,와 ; 모두 가능
+- Object 타입 지정시 사용 가능
+- class 문법과 유사
+- ,와 ; 모두 가능
+- 컴파일하면 JS로 바뀌지 않고 사라짐
+- 클래스의 모양을 특정할 수 있음
 */
 
 interface Square {
