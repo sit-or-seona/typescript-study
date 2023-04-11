@@ -42,3 +42,81 @@ class LocalStorageAPI<T> extends LocalStorage2<T> {
     this.storage = {};
   }
 }
+
+/* 
+Geolocation API:
+overloading을 사용하세요.
+
+geolocation.getCurrentPosition(successFn);
+geolocation.getCurrentPosition(successFn, errorFn);
+geolocation.getCurrentPosition(successFn, errorFn, optionsObj);
+geolocation.watchPosition(success);
+geolocation.watchPosition(success, error);
+geolocation.watchPosition(success, error, options);
+geolocation.clearWatch(id);
+*/
+
+interface GeolocationAPIType {
+  getCurrentPosition(
+    successFn: PositionCallback,
+    errorFn: PositionErrorCallback,
+    optionsObj: PositionOptions
+  ): void;
+  watchPosition(
+    success: PositionCallback,
+    error: PositionErrorCallback,
+    options: PositionOptions
+  ): void;
+  clearWatch(id: number): void;
+}
+
+class GeolocationClass implements GeolocationAPIType {
+  getCurrentPosition(successFn: PositionCallback): void;
+  getCurrentPosition(
+    successFn: PositionCallback,
+    errorFn: PositionErrorCallback
+  ): void;
+  getCurrentPosition(
+    successFn: PositionCallback,
+    errorFn: PositionErrorCallback,
+    optionsObj: PositionOptions
+  ): void;
+  getCurrentPosition(
+    successFn: PositionCallback,
+    errorFn?: PositionErrorCallback,
+    optionsObj?: PositionOptions
+  ) {
+    if (errorFn === undefined && optionsObj === undefined) {
+      navigator.geolocation.getCurrentPosition(successFn);
+    } else if (optionsObj === undefined) {
+      navigator.geolocation.getCurrentPosition(successFn, errorFn);
+    } else {
+      navigator.geolocation.getCurrentPosition(successFn, errorFn, optionsObj);
+    }
+  }
+
+  watchPosition(success: PositionCallback): void;
+  watchPosition(success: PositionCallback, error: PositionErrorCallback): void;
+  watchPosition(
+    success: PositionCallback,
+    error: PositionErrorCallback,
+    options: PositionOptions
+  ): void;
+  watchPosition(
+    success: PositionCallback,
+    error?: PositionErrorCallback,
+    options?: PositionOptions
+  ) {
+    if (error === undefined && options === undefined) {
+      navigator.geolocation.watchPosition(success);
+    } else if (options === undefined) {
+      navigator.geolocation.watchPosition(success, error);
+    } else {
+      navigator.geolocation.watchPosition(success, error, options);
+    }
+  }
+
+  clearWatch(id: number) {
+    navigator.geolocation.clearWatch(id);
+  }
+}
